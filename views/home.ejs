@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MubcoProject</title>
+    <link rel="stylesheet" href="/css/semantic.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="ui menu">
+            <div class="header item">
+                Ozel Ders Evi
+            </div>
+            <a class="item">
+                About us
+            </a>
+            <a class="item">
+                Jobs
+            </a>
+            <a class="item">
+                Locations
+            </a>
+        </div>
+        <br><br><br>
+
+        <div class="ui container">
+            <form action="/addHoca" class="ui form" method="POST">
+                <div class="ui three fields">
+
+                    <div class="field">
+                        <label for="hoca_ad" class="ui header green">Hoca Ad Girin:</label>
+                        <input type="text" name="hoca_ad" required="">
+                    </div>
+                    <div class="field">
+                        <label for="hoca_soyad" class="ui header green">Hoca Soyad Girin:</label>
+                        <input type="text" name="hoca_soyad" required="">
+                    </div>
+                    <div class="field">
+                        <label for="hoca_brans" class="ui header green">Hoca Brans Girin:</label>
+                        <input type="text" name="hoca_brans" required="">
+                    </div>
+                </div>
+                <div class="ui fluid field">
+                    <input type="submit" value="Submit" class="ui button green fluid">
+                </div>
+            </form>
+            <br>
+            <form action="/addOgrenci" class="ui form" method="POST">
+                <div class="ui two fields">
+                    <div class="field">
+                        <label for="ogrenci_ad" class="ui header green">Ogrenci Ad Girin:</label>
+                        <input type="text" name="ogrenci_ad" required="">
+                    </div>
+                    <div class="field">
+                        <label for="ogrenci_soyad" class="ui header green">Ogrenci Soyad Girin:</label>
+                        <input type="text" name="ogrenci_soyad" required="">
+                    </div>
+                </div>
+                <div class="ui fluid field">
+                    <input type="submit" value="Submit" class="ui button green fluid">
+                </div>
+            </form>
+            <br>
+            <form action="/addOzelDers" class="ui form" method="POST">
+                <div class="ui two fields">
+                    <div class="field">
+                        <label for="drpDwnhocaAd" class="ui header green">Ozel Ders Icın Hoca Secin:</label>
+                        <select name="drpDwnhocaAd">
+                            <% hoca.forEach(function(item){ %>
+                                <option value="<%= item.Ad %>">
+                                    <%= item.Ad %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="drpDwnOgrenciAd" class="ui header green">Ozel Ders Icın Ogrenci Secin:</label>
+                        <select name="drpDwnOgrenciAd">
+                            <% ogrenci.forEach(function(item){ %>
+                                <option value="<%= item.Ad %>">
+                                    <%= item.Ad %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+                </div>
+                <div class="ui fluid field">
+                    <input type="submit" value="Submit" class="ui button green fluid">
+                </div>
+            </form>
+            <br><br>
+            <table class="ui green table">
+                <thead>
+                    <tr>
+                        <th>Ozel Ders Hoca Adı</th>
+                        <th>Ozel Ders Ogrenci Ad</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% ozelDers.forEach(function(item){ %>
+                        <tr>
+                            <td><%- item.HocaAd %></td>
+                            <td><%- item.OgrenciAd %></td>
+                            <td><a class="ui red button" href="/delete/<%= item._id %>"><i class="minus icon"></i></a>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/js/semantic.min.js"></script>
+</body>
+
+</html>
